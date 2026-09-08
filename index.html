@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="color-scheme" content="dark" />
+<title>탈모 디펜스 : 이상연의 마지막 한 올</title>
+<link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+<div id="wrap">
+<div id="gameShell">
+<canvas id="game" width="960" height="540"></canvas>
+
+<div id="topbar">
+  <div class="chip" id="title">🧑‍🦲 탈모 디펜스 : 이상연의 마지막 한 올</div>
+  <div class="chip">🌱 <span id="gold">0</span></div>
+  <div class="chip">🧬 <span id="life">0</span></div>
+  <div class="chip">🌊 <span id="wave">0/10</span></div>
+</div>
+
+<div id="legend">
+  <span class="badge phys">물리</span> 머리카락·케라틴 ·
+  <span class="badge spec">특수</span> 성장 신호 ·
+  모모세포는 <span class="badge rally">집결지</span> 지정 가능
+</div>
+
+<div id="preview"></div>
+<div id="toast"></div>
+
+<div id="controls">
+  <button id="waveBtn">▶ 다음 웨이브</button>
+  <button class="skill" id="minoBtn">💧 미녹시딜<br><small id="minoCd">사용 가능</small></button>
+  <button class="skill" id="massageBtn">🫳 두피 마사지<br><small id="massageCd">사용 가능</small></button>
+  <button class="skill" id="nutriBtn">🥚 영양 공급<br><small id="nutriCd">사용 가능</small></button>
+</div>
+
+<div id="panel">
+  <h3 id="panelTitle"></h3>
+  <p id="panelDesc"></p>
+  <div id="panelBody"></div>
+</div>
+
+<div id="story">
+  <div id="storyCard">
+    <div id="storyCount">1 / 4</div>
+    <button id="storySkip" type="button">SKIP</button>
+    <div id="storyScene">
+      <img id="storyImage" src="./assets/intro/intro1.jpg" alt="오프닝 1" />
+    </div>
+    <div id="storyText"></div>
+    <div id="storyHint">화면 클릭 / Space / Enter</div>
+    <button id="storyNext" type="button">다음 ▶</button>
+  </div>
+</div>
+
+<div id="modal">
+  <div id="modalCard">
+    <h1 id="modalTitle"></h1>
+    <p id="modalText"></p>
+    <button id="restartBtn" type="button">다시 도전</button>
+  </div>
+</div>
+</div>
+</div>
+<script src="./game.js"></script>
+</body>
+</html>
