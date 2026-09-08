@@ -1,39 +1,94 @@
-탈모 디펜스 : 이상연의 마지막 한 올 — Roguelite 15-Wave Update
+탈모 디펜스 : 이상연의 마지막 한 올 — 1차 실전 밸런스 패치 v5
 Release verification
 
 [정적 검사]
-- game.js Node syntax check: PASS
-- Augment definitions: 30개, 중복 ID 없음
-- requestAnimationFrame: 루프 내부 1회 + 최초 시작 1회만 존재
-- mousedown/mousemove/click/mouseup/keydown 주요 이벤트 리스너 중복 없음
+- game.js `node --check`: PASS
+- 기존 15 WavePlan 구조 유지: PASS
+- 기존 30 Augment 정의 유지: PASS
+- requestAnimationFrame 최초 시작/루프 구조 중복 없음: PASS
+- 주요 canvas/window 이벤트 리스너 중복 없음: PASS
 
-[상태/진행 테스트]
-- reset 시 Wave 0 / 증강 0 / 적 0으로 초기화: PASS
-- 15개 WavePlan 생성: PASS
-- Wave 10 스트레스 포함: PASS
-- Wave 15 유전적 민감성 포함: PASS
-- 수면 부족 / 피지 과다 / 흡연 신규 적 존재: PASS
-- Wave 2/5/8/11/14 증강 선택 발생: PASS
-- 증강 선택 중 paused: PASS
-- 증강 선택 후 정상 resume: PASS
-- Wave 10 완료 후 game over 미발생: PASS
-- Wave 15 완료 후 정상 ending: PASS
-- 유전 보스 Phase 2/3 전환: PASS
-- 강제 Mutation 생성: PASS
-- 타워 건설 / Lv2 / Lv3 / 최종 진화: PASS
-- 재시작 시 증강/적/웨이브/영웅 임시상태 초기화: PASS
-- 기본 상태 및 전투 업데이트 후 NaN/Infinity 없음: PASS
+[경제 / 웨이브 시뮬레이션]
+- 5,000 랜덤 시드 패치 전/후 비교: PASS
+- 패치 전 일반 획득 영양분 평균: 5,828.4
+- 패치 후 일반 획득 영양분 평균: 4,481.2
+- 평균 공급량 감소: 23.1%
+- Wave 1~3 Threat 변화 없음: PASS
+- W6~10 후반 진입 Threat 단계 상승: PASS
+- W11~14 목표 수준의 후반 Threat 상승: PASS
+- 500 랜덤 시드에서 각 Wave Threat/Effective Budget 범위 유지: PASS
+- Normal 한 적당 Mutation 최대 1개 구조 유지: PASS
 
-[랜덤 웨이브 검증]
-- 200개 서로 다른 시드로 15웨이브 생성
-- 각 웨이브 Threat Budget 최소/최대 범위 준수: PASS
-- 획득 증강 재등장 방지 / 선택창 중복 방지: PASS
+[중간 침투]
+- W12 중앙 두피 균열 metadata 생성: PASS
+- W14 후방 두피 균열 metadata 생성: PASS
+- 다음 웨이브 preview에 침투 경고 표시: PASS
+- W12 큐에 침투 사전경고 + 실제 스폰 이벤트 존재: PASS
+- 사전 경고 visual zone 생성: PASS
+- 침투 적이 중간 경로에서 스폰된 뒤 기존 path를 따라 정상 이동: PASS
+- 침투 이벤트가 큐에 남아 있을 때 조기호출로 스킵되지 않음: PASS
 
-[전투 스트레스 테스트]
-- 30개 증강을 모두 적용한 테스트 상태에서 4종 타워 + 모든 적 타입 동시 업데이트: PASS
-- 신규 적 / 유전 보스 포함 draw 함수 호출: PASS
-- 300 tick 전투 갱신 후 finite number 상태 유지: PASS
+[Block 대응]
+- 일반 흡연은 2.8초 전까지 정상 Block됨: PASS
+- 흡연 니코틴 돌진 이후 progress 전진 / blocker 피해 / cooldown: PASS
+- 흡연 Block 완전 면역 아님: PASS
+- DHT의 병사 상대 근접 피해 +25% (12 -> 15 DPS): PASS
+- 유전적 민감성 5초 Block 후 모근 압박: PASS
+- 모근 압박 병사 피해 / knockback / 1초 Block 무시: PASS
+- 이후 다시 Block 가능 구조: PASS
 
-참고:
-실행 환경의 Chromium 네트워크 정책에서 localhost 접속이 차단되어 실제 브라우저 자동화 대신
-Node 기반 DOM/Canvas 스텁으로 로딩, 진행, 전투, 렌더 호출을 검증했습니다.
+[CC Diminishing Return]
+- 일반 적 연속 기절 지속시간: 1.15 / 0.8625 / 0.575 / 0.345초: PASS
+- 최근 5초 기록 기반: PASS
+- 6초 이상 지나면 CC 기록 초기화: PASS
+- 정예 / 보스 별도 감소 계수: PASS
+- 완전 기절 면역 없음: PASS
+- 탄성 케라틴 기본 기절 확률 40% 유지: PASS
+
+[신규 적 역할]
+- 피지 과다 보호막 유지: PASS
+- 보호막 생존 중 직접 피해 정상 / 광역 피해 26% 감소: PASS
+- 보호막 파괴 후 정상 광역 피해 경로: PASS
+- 수면 부족 공격력 디버프 반경 128 / 22% 감소: PASS
+- 여러 수면 부족 디버프 비중첩: PASS
+
+[유전적 민감성]
+- 기존 HP 4,800 / 3 Phase 유지: PASS
+- Phase 1 -> 2 70% 경계: PASS
+- Phase 2 -> 3 35% 경계: PASS
+- Phase 전환 1.1초 / 피해 65% 감소: PASS
+- 순간 폭딜 Phase skip 방지: PASS
+- Phase 2 타워 밀집/활성/진화 상태 기반 후보 선정: PASS
+- Phase 2 약 2초 사전 경고 -> 실제 민감 영역: PASS
+- Phase 3 최종진화/공격 가능 타워 우선 휴지기: PASS
+- 최근 휴지기 대상 10초 우선 제외: PASS
+- 실제 유전 보스 처치 후 Wave15 ending: PASS
+
+[진행 / 재시작]
+- Wave 10 스트레스 처치 후 ending 미발생: PASS
+- Wave 11 진행 가능: PASS
+- Wave 14 증강 이벤트 pause / resume: PASS
+- 실제 leak로 모낭 HP 0 -> game over: PASS
+- reset 후 증강 / 적 / zone / wave / 임시 보스 상태 초기화: PASS
+- transient CC / Block 대응 상태는 enemy 객체와 함께 완전 초기화: PASS
+
+[수치 안정성]
+- 4개 타워 + 모든 적 타입 동시 300 tick 전투 업데이트: PASS
+- NaN 없음: PASS
+- Infinity 없음: PASS
+- 주요 상태 undefined 접근 없음: PASS
+
+[브라우저 스모크 테스트]
+- 실행 환경 정책상 localhost/file 직접 navigation은 차단됨.
+- 대신 실제 index.html + style.css + game.js를 Playwright 페이지에 인라인 로드해 브라우저 런타임을 검증함.
+- 오프닝 표시 및 SKIP: PASS
+- UI Wave 0/15 표시: PASS
+- 사운드 메뉴: PASS
+- 첫 건설지점 솜털 건설 (영양분 265 -> 200): PASS
+- Wave 1 시작 (1/15): PASS
+- 영웅 좌클릭 선택 + 우클릭 이동 명령: PASS
+- JavaScript runtime error: 없음
+
+[주의]
+자동 테스트는 코드 안정성 / 랜덤 범위 / 상태 전환 검증용이다.
+실제 타워 위치, Block, 광역 화력, 영웅 조작, 액티브 타이밍이 포함되는 TD 체감 난이도는 실제 플레이테스트로 최종 확인해야 한다.

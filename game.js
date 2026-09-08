@@ -172,9 +172,9 @@ const enemyDefs={
  fried:{name:'튀김류',hp:190,speed:35,reward:14,leak:2,size:17,phys:.50,spec:.10,melee:10,color:'#d79238',threat:3},
  dht:{name:'DHT',hp:158,speed:61,reward:18,leak:2,size:15,phys:.10,spec:.45,melee:12,color:'#a54163',threat:3.2},
  inflame:{name:'만성염증',hp:126,speed:44,reward:16,leak:2,size:15,phys:.15,spec:.05,melee:6,color:'#df4c3f',threat:2.6},
- insulin:{name:'인슐린 저항성',hp:255,speed:34,reward:23,leak:3,size:19,phys:.35,spec:.25,melee:14,color:'#7c6291',threat:4.5},
- sleep:{name:'수면 부족',hp:145,speed:46,reward:18,leak:2,size:15,phys:.10,spec:.18,melee:7,color:'#536d9a',threat:3.1},
- sebum:{name:'피지 과다',hp:300,speed:31,reward:26,leak:3,size:20,phys:.28,spec:.22,melee:15,color:'#b88e43',shield:105,threat:4.8},
+ insulin:{name:'인슐린 저항성',hp:255,speed:34,reward:23,leak:3,size:19,phys:.35,spec:.25,melee:14,color:'#7c6291',threat:4.5,elite:true},
+ sleep:{name:'수면 부족',hp:145,speed:46,reward:18,leak:2,size:15,phys:.10,spec:.18,melee:7,color:'#536d9a',threat:3.1,support:true},
+ sebum:{name:'피지 과다',hp:300,speed:31,reward:26,leak:3,size:20,phys:.28,spec:.22,melee:15,color:'#b88e43',shield:105,threat:4.8,elite:true},
  smoking:{name:'흡연',hp:112,speed:70,reward:17,leak:2,size:14,phys:.08,spec:.08,melee:8,color:'#68736d',threat:2.8},
  stress:{name:'스트레스',hp:1900,speed:23,reward:180,leak:10,size:28,phys:.25,spec:.25,melee:24,color:'#48434e',threat:22,boss:true},
  genetic:{name:'유전적 민감성',shortName:'유전',hp:4800,speed:17,reward:450,leak:20,size:34,phys:.28,spec:.28,melee:30,color:'#63305f',threat:48,boss:true}
@@ -200,18 +200,20 @@ const WaveGenerator={
   {ranges:{alcohol:[10,10]},budget:[10,10],order:['alcohol'],gap:.72,mutation:.00},
   {ranges:{alcohol:[13,15]},budget:[13,15],order:['alcohol'],gap:.56,mutation:.00},
   {ranges:{alcohol:[9,11],fried:[4,4]},budget:[21,24],order:['alcohol','fried','alcohol'],gap:.58,mutation:.00},
-  {ranges:{fried:[6,7],alcohol:[10,13]},budget:[28,34],order:['fried','alcohol','fried','alcohol'],gap:.49,mutation:.00},
-  {ranges:{dht:[5,6],alcohol:[11,13],fried:[0,2]},budget:[28,36],order:['alcohol','dht','alcohol','fried','dht'],gap:.47,mutation:.05},
-  {ranges:{inflame:[5,6],alcohol:[18,21],fried:[0,2]},budget:[31,41],order:['alcohol','inflame','alcohol','fried','inflame'],gap:.39,mutation:.06},
-  {ranges:{fried:[6,8],dht:[5,6],inflame:[4,5],alcohol:[4,7]},budget:[49,61],order:['fried','dht','alcohol','inflame','fried','dht'],gap:.43,mutation:.08},
-  {ranges:{insulin:[3,3],alcohol:[13,16],dht:[6,7],inflame:[0,2]},budget:[47,57],order:['insulin','alcohol','dht','alcohol','insulin','dht','inflame'],gap:.40,mutation:.10},
-  {ranges:{insulin:[3,4],fried:[7,9],inflame:[6,7],dht:[7,8],alcohol:[2,5]},budget:[72,86],order:['fried','dht','insulin','inflame','fried','dht','alcohol','insulin'],gap:.38,mutation:.12},
-  {ranges:{stress:[1,1],dht:[5,6],inflame:[4,5],alcohol:[10,12]},budget:[58,65],order:['alcohol','dht','stress','inflame','alcohol','dht'],gap:.42,mutation:.11},
-  {ranges:{sleep:[5,6],alcohol:[9,12],dht:[4,5],fried:[2,3]},budget:[47,57],order:['sleep','alcohol','dht','sleep','fried','alcohol'],gap:.39,mutation:.14},
-  {ranges:{smoking:[7,9],sleep:[3,4],alcohol:[13,17],inflame:[4,5],dht:[2,4]},budget:[61,76],order:['smoking','alcohol','sleep','inflame','smoking','dht','alcohol'],gap:.31,mutation:.18},
-  {ranges:{sebum:[4,5],insulin:[3,4],fried:[6,8],smoking:[4,6],sleep:[1,2]},budget:[70,84],order:['fried','sebum','smoking','insulin','fried','sebum','sleep','smoking'],gap:.36,mutation:.18},
-  {ranges:{dht:[8,10],inflame:[7,8],insulin:[3,4],sleep:[4,5],smoking:[6,8],sebum:[3,4],fried:[2,4]},budget:[105,122],order:['dht','sleep','smoking','inflame','sebum','insulin','dht','fried','smoking','inflame'],gap:.31,mutation:.22},
-  {ranges:{genetic:[1,1],sebum:[2,3],insulin:[2,3],smoking:[4,5],dht:[4,5]},budget:[90,103],order:['smoking','sebum','dht','genetic','insulin','smoking','dht'],gap:.40,mutation:.20}
+  {ranges:{fried:[6,8],alcohol:[11,14]},budget:[30,36],order:['fried','alcohol','fried','alcohol'],gap:.48,mutation:.00},
+  {ranges:{dht:[5,6],alcohol:[12,14],fried:[1,2]},budget:[31,39],order:['alcohol','dht','alcohol','fried','dht'],gap:.46,mutation:.06},
+  {ranges:{inflame:[5,7],alcohol:[18,22],fried:[1,3]},budget:[35,46],order:['alcohol','inflame','alcohol','fried','inflame'],gap:.38,mutation:.07},
+  {ranges:{fried:[7,8],dht:[5,7],inflame:[4,6],alcohol:[5,8]},budget:[55,68],order:['fried','dht','alcohol','inflame','fried','dht'],gap:.41,mutation:.08},
+  {ranges:{insulin:[3,4],alcohol:[14,17],dht:[6,8],inflame:[1,3]},budget:[54,64],order:['insulin','alcohol','dht','alcohol','insulin','dht','inflame'],gap:.38,mutation:.11},
+  {ranges:{insulin:[3,4],fried:[8,10],inflame:[6,8],dht:[8,9],alcohol:[3,6]},budget:[84,100],order:['fried','dht','insulin','inflame','fried','dht','alcohol','insulin'],gap:.35,mutation:.12},
+  {ranges:{stress:[1,1],dht:[6,7],inflame:[5,6],alcohol:[11,13],fried:[1,2]},budget:[70,79],order:['alcohol','dht','stress','inflame','fried','alcohol','dht'],gap:.39,mutation:.12},
+  {ranges:{sleep:[6,7],alcohol:[10,13],dht:[5,6],fried:[2,4]},budget:[60,67],order:['sleep','alcohol','dht','sleep','fried','alcohol'],gap:.37,mutation:.16},
+  {ranges:{smoking:[8,10],sleep:[4,5],alcohol:[15,18],inflame:[5,6],dht:[3,5]},budget:[78,84],order:['smoking','alcohol','sleep','inflame','smoking','dht','alcohol'],gap:.29,mutation:.18,
+   infiltration:{label:'중앙 두피 균열',progress:.55,at:10.5,warningLead:2.6,groups:[{type:'smoking',n:2},{type:'sleep',n:1}]}},
+  {ranges:{sebum:[5,6],insulin:[4,5],fried:[8,10],smoking:[5,7],sleep:[2,3]},budget:[100,110],order:['fried','sebum','smoking','insulin','fried','sebum','sleep','smoking'],gap:.33,mutation:.22},
+  {ranges:{dht:[10,12],inflame:[8,10],insulin:[4,5],sleep:[5,6],smoking:[8,10],sebum:[4,5],fried:[3,5]},budget:[145,155],order:['dht','sleep','smoking','inflame','sebum','insulin','dht','fried','smoking','inflame'],gap:.28,mutation:.24,
+   infiltration:{label:'후방 두피 균열',progress:.68,at:11.8,warningLead:2.7,groups:[{type:'smoking',n:2},{type:'dht',n:2},{type:'sleep',n:1}]}},
+  {ranges:{genetic:[1,1],sebum:[3,4],insulin:[3,4],smoking:[5,6],dht:[5,6],sleep:[1,2]},budget:[115,125],order:['smoking','sebum','dht','genetic','insulin','sleep','smoking','dht'],gap:.37,mutation:.10}
  ],
  threat(counts){
   return Object.entries(counts).reduce((sum,[type,n])=>sum+(enemyDefs[type]?.threat||1)*n,0);
@@ -250,7 +252,12 @@ const WaveGenerator={
    groups.push({type,n,gap:Number(gap.toFixed(3))});
   }
   for(const [type,n] of Object.entries(remaining))if(n>0)groups.push({type,n,gap:spec.gap});
-  return {wave,counts,groups,threat:Number(this.threat(counts).toFixed(1)),mutationChance:spec.mutation};
+  const infiltration=spec.infiltration?{...spec.infiltration,groups:spec.infiltration.groups.map(g=>({...g}))}:null;
+  const infiltrationCounts={};
+  if(infiltration)for(const g of infiltration.groups)infiltrationCounts[g.type]=(infiltrationCounts[g.type]||0)+g.n;
+  const baseThreat=this.threat(counts),infiltrationThreat=this.threat(infiltrationCounts),effectiveBudget=[spec.budget[0]+infiltrationThreat,spec.budget[1]+infiltrationThreat];
+  return {wave,counts,groups,baseThreat:Number(baseThreat.toFixed(1)),infiltrationThreat:Number(infiltrationThreat.toFixed(1)),
+          threat:Number((baseThreat+infiltrationThreat).toFixed(1)),budget:[...spec.budget],effectiveBudget:effectiveBudget.map(x=>Number(x.toFixed(1))),mutationChance:spec.mutation,infiltration};
  }
 };
 
@@ -271,7 +278,8 @@ const MutationSystem={
   const plan=game.wavePlans?.[waveId-1];
   const chance=plan?.mutationChance||0;
   if(game.mutationRng()>chance)return;
-  const def=pickOne(game.mutationRng,this.defs);
+  const pool=this.defs.filter(def=>!(e.type==='sebum'&&def.id==='shield')&&!(e.type==='smoking'&&def.id==='berserk'));
+  const def=pickOne(game.mutationRng,pool);
   e.mutation={id:def.id,name:def.name,icon:def.icon,color:def.color,desc:def.desc};
   def.apply(e);
  },
@@ -493,6 +501,19 @@ function grantGold(amount,reason=''){
  if(game.stats)game.stats.nutritionEarned+=n;
  return n;
 }
+function killRewardMultiplier(wave){
+ if(wave<=5)return 1;
+ if(wave<=8)return .83;
+ if(wave<=10)return .68;
+ if(wave<=12)return .55;
+ if(wave<=14)return .45;
+ return .48;
+}
+function waveClearBonus(wave){
+ if(wave<=5)return 28+wave*3;
+ if(wave<=10)return 30+wave*2;
+ return ({11:40,12:42,13:44,14:45,15:46})[wave]||46;
+}
 function towerInvested(t){
  if(Number.isFinite(t.invested))return t.invested;
  const d=towerDefs[t.type];if(!d)return 0;
@@ -513,10 +534,18 @@ function applySlow(e,duration,factor){
  if(e.ccBlockReady){e.ccBlockReady=false;toast(`${enemyDefs[e.type].name}: 완고함으로 슬로우 무효`);return false}
  e.slow=Math.max(e.slow||0,duration);e.slowFactor=Math.min(e.slowFactor||1,factor);return true;
 }
+function stunDurationFactor(e,recentCount){
+ const boss=enemyDefs[e.type]?.boss,elite=enemyDefs[e.type]?.elite;
+ const table=boss?[.68,.50,.34,.22]:elite?[.90,.68,.46,.28]:[1,.75,.50,.30];
+ return table[Math.min(recentCount,table.length-1)];
+}
 function applyStun(e,duration){
  if(!e||e.dead)return false;
  if(e.ccBlockReady){e.ccBlockReady=false;toast(`${enemyDefs[e.type].name}: 완고함으로 기절 무효`);return false}
- e.stun=Math.max(e.stun||0,duration);return true;
+ const now=game.time;
+ e.stunHistory=(e.stunHistory||[]).filter(t=>now-t<5);
+ const factor=stunDurationFactor(e,e.stunHistory.length),actual=Math.max(.08,duration*factor);
+ e.stunHistory.push(now);e.stun=Math.max(e.stun||0,actual);return true;
 }
 
 
@@ -534,7 +563,7 @@ function reset(){
   dragSelecting:false,dragStart:null,dragEnd:null,suppressNextClick:false,hoverEnemy:null,hoverX:0,hoverY:0,
   runSeed,wavePlans:[],currentWavePlan:null,mutationRng:mulberry32(runSeed^0x51f15e),augmentRng:mulberry32(runSeed^0xa7719),
   acquiredAugments:[],augMods:createAugmentMods(),augmentSelecting:false,
-  earlyStreak:0,firstResponseUntil:0,towerSerial:0,enemySerial:0,
+  earlyStreak:0,firstResponseUntil:0,towerSerial:0,enemySerial:0,infiltrationWarnings:[],
   hero:{x:520,y:335,targetX:520,targetY:335,hp:160,maxHp:160,attackCd:0,level:1,xp:0,dead:false,respawn:0,
         shieldUntil:0,auraUntil:0,rebirthReady:true,augmentLastStandReady:true,skillCd:{fortify:0,hope:0,guard:0}},
   skillCd:{mino:0,massage:0,nutri:0},
@@ -597,7 +626,8 @@ function syncUI(){
  if(next){
   const plan=game.wavePlans[next-1];
   const mutation=plan?.mutationChance?` · 변이 확률 ${Math.round(plan.mutationChance*100)}%`:'';
-  ui.preview.innerHTML=`<b>다음 웨이브 ${next}</b><br>${waveSummary(next-1)}<br><span style="color:#d8b8bf">위협도 ${plan?.threat??'-'}${mutation}</span><br><span style="color:#bca8ae">물리 방어 높은 적 → 모유두 · 특수 저항 높은 적 → 모발/케라틴</span>`;
+  const infiltration=plan?.infiltration?`<br><span style="color:#ffb36d;font-weight:900">⚠ ${plan.infiltration.label}에서 중간 침투 발생</span>`:'';
+  ui.preview.innerHTML=`<b>다음 웨이브 ${next}</b><br>${waveSummary(next-1)}<br><span style="color:#d8b8bf">위협도 ${plan?.threat??'-'}${mutation}</span>${infiltration}<br><span style="color:#bca8ae">물리 방어 높은 적 → 모유두 · 특수 저항 높은 적 → 모발/케라틴</span>`;
  }else ui.preview.innerHTML=`<b>최종 웨이브 진행 중</b><br>유전적 민감성을 막아라.`;
 }
 
@@ -621,7 +651,13 @@ function startWave(){
  let q=[],t=.24;
  for(const g of plan.groups){
   for(let i=0;i<g.n;i++){q.push({at:t,type:g.type,wave:game.wave});t+=g.gap}
-  t+=game.wave>=11?.34:.48;
+  t+=game.wave>=11?.30:.48;
+ }
+ if(plan.infiltration){
+  const inf=plan.infiltration;
+  q.push({at:Math.max(.5,inf.at-inf.warningLead),kind:'infiltrationWarning',wave:game.wave,infiltration:inf});
+  q.push({at:inf.at,kind:'infiltrationSpawn',wave:game.wave,infiltration:inf});
+  q.sort((a,b)=>a.at-b.at);
  }
  game.queue=q;
  if(!early){
@@ -640,8 +676,10 @@ function spawnEnemy(type,waveId,opts={}){
   id:`e${++game.enemySerial}`,type,waveId,progress:opts.progress??0,x:path[0].x,y:path[0].y,hp:baseHp,maxHp:baseHp,speed:d.speed*(opts.speedMult||1),
   reward:opts.reward??d.reward,leak:opts.leak??d.leak,size:d.size*(opts.sizeMult||1),phys:d.phys,spec:d.spec,melee:d.melee,color:d.color,
   slow:0,slowFactor:1,stun:0,blockId:null,flash:0,dead:false,shield:(d.shield||0)*hpMult,maxShield:(d.shield||0)*hpMult,
-  lastDamagedAt:game.time,tempSpeedUntil:0,tempSpeedMult:1,mutation:null,ccBlockReady:false,
-  bossCd:type==='stress'?3.8:0,bossPhase:type==='genetic'?1:0,summonCd:type==='genetic'?5.5:0,zoneCd:type==='genetic'?8:0,dormancyCd:type==='genetic'?6:0
+  lastDamagedAt:game.time,tempSpeedUntil:0,tempSpeedMult:1,mutation:null,ccBlockReady:false,stunHistory:[],
+  blockedFor:0,blockBreakCd:0,ignoreBlockUntil:0,rootPressureCd:0,
+  bossCd:type==='stress'?3.8:0,bossPhase:type==='genetic'?1:0,summonCd:type==='genetic'?5.5:0,zoneCd:type==='genetic'?8:0,dormancyCd:type==='genetic'?6:0,
+  phaseProtectUntil:0,pendingZone:null,recentDormancyTargets:[]
  };
  if(e.progress>0){const pos=pathPos(e.progress);e.x=pos.x;e.y=pos.y}
  MutationSystem.assign(e,waveId,opts);
@@ -792,15 +830,34 @@ function gainHeroXp(extra=0){
  }
 }
 
-function damageEnemy(e,amount,kind,source){
+function setGeneticPhase(e,phase){
+ if(!e||e.type!=='genetic'||phase<=e.bossPhase)return;
+ e.bossPhase=phase;e.phaseProtectUntil=game.time+1.1;
+ if(phase===2){e.zoneCd=1.2;e.pendingZone=null;showEventBanner('유전 2페이즈','두피가 반응한다! 잠시 피해를 버티며 타워 밀집지역을 노린다.',1500,false)}
+ if(phase===3){e.dormancyCd=1.0;e.pendingZone=null;e.recentDormancyTargets=[];showEventBanner('유전 3페이즈 · 광폭','유전이 폭주한다! 휴지기와 모근 압박을 버텨라.',1700,false)}
+}
+function damageEnemy(e,amount,kind,source,flags={}){
  if(!e||e.dead||!Number.isFinite(amount))return 0;
  let resist=kind==='special'?e.spec:e.phys;
  if(kind==='special'&&e.specialExposeUntil>game.time)resist=Math.max(0,resist-.12);
  let mult=Math.max(.05,1-resist);
  for(const i of game.enemies)if(i!==e&&!i.dead&&i.type==='insulin'&&dist(i,e)<92){mult*=.84;break}
  let incoming=Math.max(0,amount*mult),dealt=0;
+ if(e.type==='sebum'&&e.shield>0&&flags.splash)incoming*=.74;
+ if(e.type==='genetic'&&game.time<(e.phaseProtectUntil||0))incoming*=.35;
  if(e.shield>0){const absorbed=Math.min(e.shield,incoming);e.shield-=absorbed;incoming-=absorbed;dealt+=absorbed}
- if(incoming>0){const before=e.hp;e.hp-=incoming;dealt+=Math.min(before,incoming)}
+ if(incoming>0){
+  const before=e.hp;
+  if(e.type==='genetic'&&e.bossPhase===1&&e.hp-incoming<=e.maxHp*.70){
+   e.hp=e.maxHp*.70;dealt+=Math.max(0,before-e.hp);setGeneticPhase(e,2);
+  }else if(e.type==='genetic'&&e.bossPhase===2&&game.time<(e.phaseProtectUntil||0)&&e.hp-incoming<e.maxHp*.35){
+   e.hp=Math.max(e.maxHp*.35,e.hp-incoming);dealt+=Math.max(0,before-e.hp);
+  }else if(e.type==='genetic'&&e.bossPhase===2&&e.hp-incoming<=e.maxHp*.35){
+   e.hp=e.maxHp*.35;dealt+=Math.max(0,before-e.hp);setGeneticPhase(e,3);
+  }else{
+   e.hp-=incoming;dealt+=Math.min(before,incoming);
+  }
+ }
  e.lastDamagedAt=game.time;e.flash=.08;playSfx('hit');
  if(source&&typeof source==='object'&&source.id&&game.stats.towerRecords[source.id])game.stats.towerRecords[source.id].damage+=dealt;
  if(e.hp<=0)killEnemy(e,source);
@@ -808,7 +865,7 @@ function damageEnemy(e,amount,kind,source){
 }
 function killEnemy(e,source){
  if(!e||e.dead)return;e.dead=true;playSfx('death');game.stats.totalKills++;
- const reward=Math.round(e.reward*game.augMods.nutritionMult);grantGold(reward,'kill');
+ const reward=Math.round(e.reward*game.augMods.nutritionMult*killRewardMultiplier(e.waveId||game.wave));grantGold(reward,'kill');
  if(source==='hero'){
   game.stats.heroKills++;gainHeroXp(8);
   if(hasAugment('hero_finisher'))grantGold(3,'hero-finisher');
@@ -864,7 +921,7 @@ function towerDamageFactor(t){
   if(t.type==='fuzz'&&hasAugment('fuzz_dhtproof'))debuff=smokeBoost?.80:.87;
   f*=debuff;
  }
- for(const e of game.enemies)if(!e.dead&&e.type==='sleep'&&dist(e,t)<120){f*=.82;break}
+ for(const e of game.enemies)if(!e.dead&&e.type==='sleep'&&dist(e,t)<128){f*=.78;break}
  if(hasAugment('global_allin'))f*=isAllInTower(t)?1.40:.92;
  return f;
 }
@@ -928,10 +985,10 @@ function updateBullets(dt){
   if(l<8){
    const source=b.source;
    if(b.splash){
-    for(const x of game.enemies)if(!x.dead&&Math.hypot(x.x-e.x,x.y-e.y)<b.splash){damageEnemy(x,b.damage,'physical',source);if(b.stunChance&&Math.random()<b.stunChance)applyStun(x,1.15)}
-    if(source?.type==='keratin'&&hasAugment('keratin_center')&&!e.dead)damageEnemy(e,b.damage*.45,'physical',source);
+    for(const x of game.enemies)if(!x.dead&&Math.hypot(x.x-e.x,x.y-e.y)<b.splash){damageEnemy(x,b.damage,'physical',source,{splash:true});if(b.stunChance&&Math.random()<b.stunChance)applyStun(x,1.15)}
+    if(source?.type==='keratin'&&hasAugment('keratin_center')&&!e.dead)damageEnemy(e,b.damage*.45,'physical',source,{splash:true});
     if(source?.type==='keratin'&&hasAugment('keratin_shrapnel')&&Math.random()<.25){
-     const other=game.enemies.find(x=>!x.dead&&x!==e&&dist(x,e)<120);if(other){for(const x of game.enemies)if(!x.dead&&dist(x,other)<36)damageEnemy(x,b.damage*.45,'physical',source);game.zones.push({x:other.x,y:other.y,r:36,life:.18,max:.18,type:'boom'})}
+     const other=game.enemies.find(x=>!x.dead&&x!==e&&dist(x,e)<120);if(other){for(const x of game.enemies)if(!x.dead&&dist(x,other)<36)damageEnemy(x,b.damage*.45,'physical',source,{splash:true});game.zones.push({x:other.x,y:other.y,r:36,life:.18,max:.18,type:'boom'})}
     }
     game.zones.push({x:e.x,y:e.y,r:b.splash,life:.22,max:.22,type:'boom'});
    }else{
@@ -950,24 +1007,29 @@ function updateBullets(dt){
  game.bullets=game.bullets.filter(b=>!b.dead);
 }
 
+function defeatSoldier(s){
+ if(!s||s.dead)return;
+ s.dead=true;s.parent.nextRespawn=Math.max(s.parent.nextRespawn,game.time+Math.max(1.6,4.2*game.augMods.matrixRespawn));
+ for(const e of game.enemies)if(e.blockId===s.id)e.blockId=null;
+ if(hasAugment('matrix_sacrifice')){for(const e of game.enemies)if(!e.dead&&Math.hypot(e.x-s.x,e.y-s.y)<48){damageEnemy(e,32,'physical',s.parent);applyStun(e,.7)}game.zones.push({x:s.x,y:s.y,r:48,life:.25,max:.25,type:'boom'})}
+}
+function knockSoldier(s,e,amount=18){
+ if(!s||s.dead)return;let dx=s.x-e.x,dy=s.y-e.y,l=Math.hypot(dx,dy);if(l<1){dx=-1;dy=0;l=1}s.x+=dx/l*amount;s.y+=dy/l*amount;
+}
 function updateSoldiers(dt){
  for(const s of game.soldiers){
   if(s.dead)continue;s.attackCd-=dt;const st=towerStats(s.parent);let target=null;
   for(const e of game.enemies){if(e.dead)continue;if(Math.hypot(e.x-s.x,e.y-s.y)<27&&Math.hypot(e.x-s.homeX,e.y-s.homeY)<48){target=e;break}}
   if(target){
-   target.blockId=s.id;
+   if(game.time>=(target.ignoreBlockUntil||0))target.blockId=s.id;
    if(s.attackCd<=0){
     let dmg=st.soldierDmg;
     if(hasAugment('matrix_camaraderie')){const friends=game.soldiers.filter(x=>!x.dead&&x.parent===s.parent&&Math.hypot(x.x-target.x,x.y-target.y)<30).length;dmg*=1+Math.min(.60,Math.max(0,friends-1)*.20)}
     damageEnemy(target,dmg,'physical',s.parent);s.attackCd=.70;
    }
-   let incoming=target.melee*dt;
+   let incoming=target.melee*dt*(target.type==='dht'?1.25:1);
    if(hasAugment('matrix_guardroot')){if(enemyDefs[target.type]?.boss)incoming*=.75;else if(target.type==='dht')incoming*=.90}
-   s.hp-=incoming;
-   if(s.hp<=0){
-    s.dead=true;s.parent.nextRespawn=Math.max(s.parent.nextRespawn,game.time+Math.max(1.6,4.2*game.augMods.matrixRespawn));if(target.blockId===s.id)target.blockId=null;
-    if(hasAugment('matrix_sacrifice')){for(const e of game.enemies)if(!e.dead&&Math.hypot(e.x-s.x,e.y-s.y)<48){damageEnemy(e,32,'physical',s.parent);applyStun(e,.7)}game.zones.push({x:s.x,y:s.y,r:48,life:.25,max:.25,type:'boom'})}
-   }
+   s.hp-=incoming;if(s.hp<=0)defeatSoldier(s);
   }else{const dx=s.homeX-s.x,dy=s.homeY-s.y,l=Math.hypot(dx,dy);if(l>2){s.x+=dx/l*68*dt;s.y+=dy/l*68*dt}}
  }
  game.soldiers=game.soldiers.filter(s=>!s.dead);
@@ -989,49 +1051,81 @@ function updateHero(dt){
  }
 }
 
+function towerThreatScore(t){
+ const s=towerStats(t),hasTarget=!!findTarget(t,s.range*towerRangeFactor(t));
+ const cluster=game.towers.filter(x=>x!==t&&dist(x,t)<118).length;
+ return (hasTarget?5:0)+(t.branch?3:t.level*.8)+cluster*1.5+(towerInvested(t)/300);
+}
+function chooseGeneticZoneTarget(){
+ const candidates=game.towers.filter(t=>game.time>=t.silencedUntil);
+ if(!candidates.length)return null;
+ return [...candidates].sort((a,b)=>towerThreatScore(b)-towerThreatScore(a))[0];
+}
+function chooseDormancyVictims(e){
+ e.recentDormancyTargets=(e.recentDormancyTargets||[]).filter(x=>x.until>game.time);
+ const recent=new Set(e.recentDormancyTargets.map(x=>x.id));
+ let candidates=game.towers.filter(t=>game.time>=t.silencedUntil&&t.branch&&!recent.has(t.id));
+ if(!candidates.length)candidates=game.towers.filter(t=>game.time>=t.silencedUntil&&!recent.has(t.id));
+ if(!candidates.length)candidates=game.towers.filter(t=>game.time>=t.silencedUntil);
+ candidates.sort((a,b)=>towerThreatScore(b)-towerThreatScore(a));
+ return candidates.slice(0,Math.min(game.towers.length>=7?2:1,candidates.length));
+}
 function updateGeneticBoss(e,dt){
- const ratio=e.hp/e.maxHp;
- const nextPhase=ratio>.70?1:ratio>.35?2:3;
- if(nextPhase!==e.bossPhase){
-  e.bossPhase=nextPhase;
-  if(nextPhase===2){e.zoneCd=1.2;showEventBanner('유전 2페이즈','두피 환경 자체가 무너지기 시작한다. 보랏빛 영역 안에서는 타워 사거리가 크게 감소한다.',1500,false)}
-  if(nextPhase===3){e.dormancyCd=1.0;showEventBanner('유전 3페이즈 · 광폭','유전이 폭주한다! 이동속도가 상승하고 타워를 강제로 휴지기에 빠뜨린다.',1700,false)}
- }
  if(e.bossPhase===1){
   e.summonCd-=dt;
   if(e.summonCd<=0){
-   e.summonCd=6.3;spawnEnemyAtProgress('dht',e.progress-70,e.waveId,{noMutation:true,hpMult:.82,reward:9});
+   e.summonCd=6.1;spawnEnemyAtProgress('dht',e.progress-70,e.waveId,{noMutation:true,hpMult:.84,reward:9});
    if(Math.random()<.55)spawnEnemyAtProgress('alcohol',e.progress-105,e.waveId,{noMutation:true,hpMult:.75,reward:3,speedMult:1.08});
    toast('유전: DHT 신호 증폭!');
   }
  }
  if(e.bossPhase===2){
+  if(e.pendingZone&&game.time>=e.pendingZone.at){
+   game.zones.push({x:e.pendingZone.x,y:e.pendingZone.y,r:92,life:7.5,max:7.5,type:'geneticFog'});e.pendingZone=null;toast('유전: 민감 영역 발동! 사거리 감소');
+  }
   e.zoneCd-=dt;
-  if(e.zoneCd<=0){
-   e.zoneCd=6.8;
-   const targets=game.towers.filter(t=>game.time>=t.silencedUntil);const target=targets.length?pickOne(Math.random,targets):pathPos(clamp(e.progress+80,0,totalPath));
-   game.zones.push({x:target.x,y:target.y,r:92,life:7.5,max:7.5,type:'geneticFog'});toast('유전: 두피 민감 영역 생성! 타워 사거리 감소');
+  if(e.zoneCd<=0&&!e.pendingZone){
+   e.zoneCd=8.4;const target=chooseGeneticZoneTarget()||pathPos(clamp(e.progress+80,0,totalPath));
+   e.pendingZone={x:target.x,y:target.y,at:game.time+2};
+   game.zones.push({x:target.x,y:target.y,r:92,life:2,max:2,type:'geneticWarning'});
+   showEventBanner('⚠ 유전 반응 예고','2초 뒤 화력이 집중된 두피 구역에 민감 영역이 생긴다.',1500,false);
   }
  }
  if(e.bossPhase===3){
   e.dormancyCd-=dt;
   if(e.dormancyCd<=0){
-   e.dormancyCd=5.2;
-   const victims=[...game.towers].filter(t=>game.time>=t.silencedUntil).sort(()=>Math.random()-.5).slice(0,Math.min(2,game.towers.length));
-   victims.forEach(t=>t.silencedUntil=game.time+4.2);if(victims.length)toast('유전: 휴지기 강제 진입! 타워가 잠시 멈춘다.');
+   e.dormancyCd=5.5;const victims=chooseDormancyVictims(e);
+   victims.forEach(t=>{t.silencedUntil=game.time+3.9;e.recentDormancyTargets.push({id:t.id,until:game.time+10})});
+   if(victims.length)toast('유전: 핵심 모낭 휴지기! 최종 진화 타워가 잠시 멈춘다.');
   }
  }
 }
 
+function triggerNicotineRush(e,blocker){
+ if(!blocker||blocker.dead)return false;
+ e.blockBreakCd=7.2;e.blockedFor=0;e.blockId=null;
+ blocker.hp-=Math.max(34,blocker.maxHp*.38);knockSoldier(blocker,e,20);if(blocker.hp<=0)defeatSoldier(blocker);
+ e.progress=clamp(e.progress+50,0,totalPath);const p=pathPos(e.progress);e.x=p.x;e.y=p.y;
+ game.zones.push({x:e.x,y:e.y,r:34,life:.28,max:.28,type:'nicotineRush'});toast('흡연: 니코틴 돌진! 병사 대열 돌파');return true;
+}
+function triggerRootPressure(e){
+ e.rootPressureCd=8.5;e.ignoreBlockUntil=game.time+1.0;e.blockedFor=0;e.blockId=null;
+ for(const s of game.soldiers)if(!s.dead&&dist(s,e)<64){s.hp-=Math.max(42,s.maxHp*(e.bossPhase===3?.38:.34));knockSoldier(s,e,25);if(s.hp<=0)defeatSoldier(s)}
+ game.zones.push({x:e.x,y:e.y,r:64,life:.42,max:.42,type:'rootPressure'});toast('유전: 모근 압박! 병사를 밀어내며 잠시 Block을 무시한다.');
+}
 function updateEnemies(dt){
  for(const e of game.enemies){
   if(e.dead)continue;if(e.flash>0)e.flash-=dt;
+  e.blockBreakCd=Math.max(0,(e.blockBreakCd||0)-dt);e.rootPressureCd=Math.max(0,(e.rootPressureCd||0)-dt);
   if(e.regen&&game.time-e.lastDamagedAt>2.5&&e.hp<e.maxHp)e.hp=Math.min(e.maxHp,e.hp+e.maxHp*.025*dt);
   if(e.type==='genetic')updateGeneticBoss(e,dt);
   if(e.stun>0){e.stun-=dt;continue}
   if(e.slow>0)e.slow-=dt;else e.slowFactor=1;
-  let blocked=false;
-  if(e.blockId!=null){const soldier=game.soldiers.find(s=>s.id===e.blockId&&!s.dead);if(soldier&&Math.hypot(soldier.x-e.x,soldier.y-e.y)<35)blocked=true;else e.blockId=null}
+  let blocked=false,blocker=null;
+  if(e.blockId!=null){blocker=game.soldiers.find(s=>s.id===e.blockId&&!s.dead);if(blocker&&Math.hypot(blocker.x-e.x,blocker.y-e.y)<35&&game.time>=(e.ignoreBlockUntil||0))blocked=true;else e.blockId=null}
+  if(blocked)e.blockedFor=(e.blockedFor||0)+dt;else e.blockedFor=0;
+  if(e.type==='smoking'&&blocked&&e.blockedFor>=2.8&&e.blockBreakCd<=0){triggerNicotineRush(e,blocker);blocked=false;blocker=null}
+  if(e.type==='genetic'&&blocked&&e.blockedFor>=(e.bossPhase===3?4.2:5.0)&&e.rootPressureCd<=0){triggerRootPressure(e);blocked=false;blocker=null}
   let aura=1;
   if(game.enemies.some(i=>i!==e&&!i.dead&&i.type==='insulin'&&dist(i,e)<92))aura*=1.15;
   if(game.enemies.some(i=>i!==e&&!i.dead&&i.type==='smoking'&&dist(i,e)<88))aura*=e.type==='dht'?1.18:1.10;
@@ -1049,10 +1143,19 @@ function updateEnemies(dt){
 }
 
 function updateZones(dt){for(const z of game.zones)z.life-=dt;game.zones=game.zones.filter(z=>z.life>0)}
+function triggerInfiltrationWarning(inf){
+ const p=pathPos(totalPath*inf.progress);game.zones.push({x:p.x,y:p.y,r:42,life:inf.warningLead,max:inf.warningLead,type:'crackWarning'});
+ showEventBanner('⚠ 중간 침투 감지',`${inf.label}이 갈라진다. 약 ${inf.warningLead.toFixed(1)}초 뒤 적이 중간 경로에서 출현한다.`,1800,false);
+}
+function spawnInfiltration(inf,waveId){
+ const base=totalPath*inf.progress;let offset=0;
+ for(const g of inf.groups)for(let i=0;i<g.n;i++){spawnEnemyAtProgress(g.type,base-offset,waveId,{noMutation:true});offset+=18}
+ const p=pathPos(base);game.zones.push({x:p.x,y:p.y,r:50,life:.55,max:.55,type:'crackBurst'});toast(`⚠ ${inf.label}: 중간 침투 발생!`);
+}
 function finishCurrentWave(){
  if(!game.inWave)return;
  game.inWave=false;
- const bonus=28+game.wave*3;grantGold(bonus,'wave');toast(`웨이브 ${game.wave} 정리 완료! 영양분 +${bonus}`);
+ const bonus=waveClearBonus(game.wave);grantGold(bonus,'wave');toast(`웨이브 ${game.wave} 정리 완료! 영양분 +${bonus}`);
  game.earlyStreak=0;
  if(game.wave===15){win();return}
  if(game.wave===10){
@@ -1065,7 +1168,12 @@ function finishCurrentWave(){
 
 function updateSpawns(dt){
  if(!game.inWave)return;game.spawnClock+=dt;
- while(game.queue.length&&game.spawnClock>=game.queue[0].at){const q=game.queue.shift();spawnEnemy(q.type,q.wave)}
+ while(game.queue.length&&game.spawnClock>=game.queue[0].at){
+  const q=game.queue.shift();
+  if(q.kind==='infiltrationWarning')triggerInfiltrationWarning(q.infiltration);
+  else if(q.kind==='infiltrationSpawn')spawnInfiltration(q.infiltration,q.wave);
+  else spawnEnemy(q.type,q.wave);
+ }
  if(game.queue.length===0&&game.enemies.length===0)finishCurrentWave();else syncUI();
 }
 
@@ -1105,7 +1213,8 @@ function showEnding(type){
  const records=Object.values(game.stats.towerRecords||{});
  const topDamage=records.sort((a,b)=>b.damage-a.damage)[0];
  const topKills=[...records].sort((a,b)=>b.kills-a.kills)[0];
- const lifeRatio=game.life/20;const grade=lifeRatio>=.8&&game.hero.level>=8?'S':lifeRatio>=.6?'A':lifeRatio>=.3?'B':'C';
+ const rankScore=game.life*3+game.hero.level*1.5+Math.min(8,game.stats.evolutions)*1.5+Math.min(3,game.stats.maxEarlyStreak);
+ const grade=rankScore>=84?'S':rankScore>=63?'A':rankScore>=42?'B':'C';
  if(type==='lose'){
   playSfx('lose');ui.modalImage.src='./assets/ending/lose.png';ui.modalImage.alt='게임 오버 엔딩';ui.modalTitle.textContent='GAME OVER';ui.modalCaption.textContent='아 시발!';
   ui.modalText.innerHTML=`모낭줄기세포가 무너졌다...<br><b>Wave ${game.wave} · 영웅 Lv.${game.hero.level} · 처치 ${game.stats.totalKills}</b><br><br>잠시 후 처음 시작 장면으로 돌아갑니다.`;
@@ -1114,7 +1223,7 @@ function showEnding(type){
   const augNames=game.acquiredAugments.map(id=>AugmentManager.get(id)?.name).filter(Boolean).join(', ')||'없음';
   ui.modalText.innerHTML=`<b>남은 모낭 ${game.life}/20 · 영웅 Lv.${game.hero.level} · 총 처치 ${game.stats.totalKills}</b><br>`+
    `타워 건설 ${game.stats.towerBuilt} · 최종 진화 ${game.stats.evolutions} · 조기 호출 ${game.stats.earlyCalls} · 최고 연속 ${game.stats.maxEarlyStreak}<br>`+
-   `영웅 막타 ${game.stats.heroKills} · 획득 영양분 ${game.stats.nutritionEarned}<br>`+
+   `영웅 막타 ${game.stats.heroKills} · 획득 영양분 ${game.stats.nutritionEarned} · 등급점수 ${Math.round(rankScore)}<br>`+
    `최고 피해 타워 ${topDamage?`${topDamage.label} (${Math.round(topDamage.damage)})`:'없음'} · 최다 처치 타워 ${topKills?`${topKills.label} (${topKills.kills})`:'없음'}<br>`+
    `<span style="color:#d9b7c7">증강: ${augNames}</span><br><br>잠시 후 처음 시작 장면으로 돌아갑니다.`;
  }
@@ -1241,6 +1350,7 @@ function drawHairTower(t){
 function drawEnemy(e){
  ctx.save();ctx.translate(Math.round(e.x),Math.round(e.y));if(e.flash>0)ctx.globalAlpha=.45;
  if(e.mutation){ctx.strokeStyle=e.mutation.color;ctx.lineWidth=2;ctx.beginPath();ctx.arc(0,0,e.size+6,0,Math.PI*2);ctx.stroke()}
+ if(e.type==='genetic'&&game.time<(e.phaseProtectUntil||0)){ctx.strokeStyle='#ffd36d';ctx.lineWidth=3;ctx.beginPath();ctx.arc(0,0,e.size+10,0,Math.PI*2);ctx.stroke()}
  if(e.type==='genetic'){
   rect(-30,-28,60,55,'#38213b');rect(-23,-22,46,43,e.color);rect(-15,-13,9,9,'#ff6a92');rect(6,-13,9,9,'#ff6a92');text('유전',0,6,12);text(`P${e.bossPhase}`,0,20,8,'center','#ffd27d');
  }else if(e.type==='stress'){
@@ -1289,8 +1399,11 @@ function drawBullets(){
 }
 function drawZones(){
  for(const z of game.zones){
-  ctx.globalAlpha=z.type==='boom'||z.type==='hero'||z.type==='haste'?.32:.16;
-  ctx.fillStyle=z.type==='inflame'?'#f04433':z.type==='massage'?'#74d5e6':z.type==='hero'?'#fff29a':z.type==='geneticFog'?'#7e3e91':z.type==='haste'?'#ff6c9e':'#ffd45c';
+  if(z.type==='crackWarning'||z.type==='geneticWarning'){
+   const pulse=.65+.35*Math.sin(game.time*10);ctx.globalAlpha=.18+.14*pulse;ctx.fillStyle=z.type==='crackWarning'?'#ff8b58':'#c86bde';ctx.beginPath();ctx.arc(z.x,z.y,z.r*(.92+.08*pulse),0,Math.PI*2);ctx.fill();ctx.globalAlpha=.9;ctx.strokeStyle=z.type==='crackWarning'?'#ffd08a':'#efb0ff';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(z.x-z.r*.55,z.y);ctx.lineTo(z.x+z.r*.5,z.y-8);ctx.moveTo(z.x-8,z.y-z.r*.55);ctx.lineTo(z.x+7,z.y+z.r*.5);ctx.stroke();ctx.globalAlpha=1;continue;
+  }
+  ctx.globalAlpha=z.type==='boom'||z.type==='hero'||z.type==='haste'||z.type==='nicotineRush'||z.type==='rootPressure'||z.type==='crackBurst'?.32:.16;
+  ctx.fillStyle=z.type==='inflame'?'#f04433':z.type==='massage'?'#74d5e6':z.type==='hero'?'#fff29a':z.type==='geneticFog'?'#7e3e91':z.type==='haste'?'#ff6c9e':z.type==='nicotineRush'?'#aeb8a9':z.type==='rootPressure'?'#bd4b82':z.type==='crackBurst'?'#ff875c':'#ffd45c';
   ctx.beginPath();ctx.arc(z.x,z.y,z.r,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1;
  }
 }
@@ -1298,7 +1411,7 @@ function drawAuras(){
  for(const e of game.enemies){
   if(e.type==='dht'){ctx.globalAlpha=.07;ctx.fillStyle='#e52f72';ctx.beginPath();ctx.arc(e.x,e.y,115,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1}
   if(e.type==='insulin'){ctx.globalAlpha=.07;ctx.fillStyle='#c692ef';ctx.beginPath();ctx.arc(e.x,e.y,92,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1}
-  if(e.type==='sleep'){ctx.globalAlpha=.055;ctx.fillStyle='#6f8dd0';ctx.beginPath();ctx.arc(e.x,e.y,120,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1}
+  if(e.type==='sleep'){ctx.globalAlpha=.06;ctx.fillStyle='#6f8dd0';ctx.beginPath();ctx.arc(e.x,e.y,128,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1}
   if(e.type==='smoking'){ctx.globalAlpha=.045;ctx.fillStyle='#aab0aa';ctx.beginPath();ctx.arc(e.x,e.y,88,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1}
  }
  for(const t of game.towers)if(t.type==='papilla'&&t.branch==='vegf'){
@@ -1306,13 +1419,24 @@ function drawAuras(){
  }
 }
 
+function enemyRoleText(e){
+ if(e.type==='sleep')return '지원: 반경 128 타워 공격력 -22% (중첩 없음)';
+ if(e.type==='sebum')return '방어: 보호막 유지 중 광역 피해 -26%';
+ if(e.type==='smoking')return '돌파: 2.8초 Block 후 니코틴 돌진 (재사용 7.2초)';
+ if(e.type==='dht')return '모모세포 병사에게 근접 피해 +25%';
+ if(e.type==='genetic')return '보스: 장시간 Block 시 모근 압박으로 1초 돌파';
+ return '';
+}
 function drawEnemyTooltip(){
  const e=game.hoverEnemy;if(!e||e.dead)return;
- const def=enemyDefs[e.type],x=clamp(game.hoverX+16,8,W-238),y=clamp(game.hoverY+16,82,H-105),w=230,h=e.mutation?92:72;
+ const def=enemyDefs[e.type],role=enemyRoleText(e),recent=(e.stunHistory||[]).filter(t=>game.time-t<5).length;
+ const extra=(role?16:0)+(e.mutation?28:0)+(recent?14:0),x=clamp(game.hoverX+16,8,W-248),y=clamp(game.hoverY+16,82,H-(80+extra)),w=240,h=68+extra;
  ctx.globalAlpha=.94;rect(x,y,w,h,'#1a1116');ctx.globalAlpha=1;ctx.strokeStyle='#8d5964';ctx.strokeRect(x,y,w,h);
  text(def.name,x+9,y+14,11,'left','#ffe4c7');text(`HP ${Math.ceil(e.hp)}/${Math.ceil(e.maxHp)}${e.shield>0?` · 보호막 ${Math.ceil(e.shield)}`:''}`,x+9,y+32,9,'left','#dfcbd1');
  text(`물리저항 ${Math.round(e.phys*100)}% · 특수저항 ${Math.round(e.spec*100)}%`,x+9,y+48,9,'left','#cbb4bd');
- if(e.mutation){text(`변이: ${e.mutation.name}`,x+9,y+65,9,'left',e.mutation.color);text(e.mutation.desc,x+9,y+80,8,'left','#d8c3ca')}
+ let line=64;if(role){text(role,x+9,line,8,'left','#f1c889');line+=16}
+ if(recent){text(`최근 기절 누적 ${recent}회 · 연속 CC 지속시간 감소 중`,x+9,line,8,'left','#a9d0e8');line+=14}
+ if(e.mutation){text(`변이: ${e.mutation.name}`,x+9,line,9,'left',e.mutation.color);text(e.mutation.desc,x+9,line+15,8,'left','#d8c3ca')}
 }
 
 function draw(){
