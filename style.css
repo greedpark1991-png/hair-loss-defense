@@ -25,13 +25,32 @@ button:disabled{opacity:.4;cursor:not-allowed;transform:none}
 .towerBtn small{font-size:10px;color:#d8c2c8;line-height:1.35}
 .branchBtn{min-height:76px}
 #toast{position:absolute;left:50%;top:62px;transform:translateX(-50%);background:#1e1217ef;border:2px solid #9b5a67;border-radius:8px;padding:8px 14px;font-weight:900;opacity:0;transition:opacity .15s;pointer-events:none;white-space:nowrap;z-index:12}
-#modal{position:absolute;inset:0;background:#160e12de;display:none;align-items:center;justify-content:center;z-index:30}
-#modalCard{width:min(520px,88%);background:#2d1a21;border:3px solid #9a5b68;border-radius:12px;padding:24px;text-align:center;box-shadow:0 16px 60px #000}
-#modalCard h1{margin:0 0 10px}
-#modalCard p{color:#ead5da;line-height:1.6}
+#modal{position:absolute;inset:0;background:#140d11ee;display:none;align-items:center;justify-content:center;z-index:30}
+#modalCard{width:min(780px,92%);background:#24161c;border:3px solid #9a5b68;border-radius:14px;padding:14px;text-align:center;box-shadow:0 16px 60px #000}
+#modalVisual{position:relative;overflow:hidden;border-radius:10px;background:#0d090b;min-height:390px}
+#modalImage{display:block;width:100%;height:min(70vh,640px);object-fit:cover}
+#modalVignette{position:absolute;inset:0;background:linear-gradient(to top,#000c 0%,#0001 42%,#0008 100%);pointer-events:none}
+#modalTopText{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:20px 22px;pointer-events:none}
+#modalTitle{font-size:68px;font-weight:1000;letter-spacing:4px;color:#fff5f5;text-shadow:0 4px 12px #000,0 0 18px #000}
+#modalCaption{align-self:flex-start;margin-top:auto;margin-bottom:8px;padding:8px 14px;border-radius:10px;background:#130d10d8;border:2px solid #c38895;color:#fff0ea;font-size:28px;font-weight:900;text-shadow:0 2px #000}
+#modalText{margin:12px 4px 10px;color:#ead5da;line-height:1.6;font-size:16px}
+#restartBtn{min-width:210px}
 .kbd{padding:1px 4px;border:1px solid #8a5964;border-bottom-width:2px;border-radius:4px;background:#3e2730}
 .badge{display:inline-block;padding:2px 5px;border-radius:5px;font-size:10px;font-weight:900;margin-right:3px}
 .phys{background:#65422c}.spec{background:#513b72}.rally{background:#325f62}
+
+#audioSettings{position:absolute;left:9px;top:82px;z-index:18;pointer-events:auto}
+#audioToggle{padding:5px 8px;font-size:11px;background:#2c2025cc}
+#audioMenu{
+ display:none;width:210px;margin-top:5px;padding:9px 10px;
+ background:#1b1216ee;border:2px solid #734751;border-radius:8px;
+ box-shadow:0 8px 28px #0008
+}
+#audioMenu.open{display:block}
+#audioMenu label{display:flex;justify-content:space-between;font-size:11px;color:#ead7dc;margin:4px 0 2px}
+#audioMenu input[type=range]{width:100%;accent-color:#c26e82}
+#muteBtn{width:100%;margin-top:7px;padding:5px;font-size:10px}
+
 
 #story{
   position:absolute; inset:0; z-index:40;
@@ -101,4 +120,43 @@ button:disabled{opacity:.4;cursor:not-allowed;transform:none}
 @media(max-width:880px){
  #panel{width:275px} #preview{width:235px} #controls{max-width:62%}
  button{padding:6px 7px;font-size:11px}.skill{min-width:90px}#legend{display:none}
+}
+
+
+#augmentTracker{
+ position:absolute;right:9px;top:126px;width:280px;z-index:10;
+ background:#21161be6;border:2px solid #714650;border-radius:8px;padding:7px 9px;
+ font-size:10px;line-height:1.45;pointer-events:none
+}
+#augmentTrackerTitle{font-weight:900;color:#f4d4df;margin-bottom:3px}
+#augmentList{color:#d7bdc6;max-height:42px;overflow:hidden}
+
+#eventBanner{position:absolute;inset:0;z-index:34;display:none;align-items:center;justify-content:center;background:#100b0d9c;pointer-events:none}
+#eventBanner.show{display:flex}
+#eventBannerCard{width:min(620px,82%);padding:24px 28px;text-align:center;background:#221419ef;border:3px solid #975765;border-radius:12px;box-shadow:0 18px 60px #000a}
+#eventBannerTitle{font-size:36px;font-weight:1000;color:#ffe4bd;text-shadow:0 3px #000;letter-spacing:1px}
+#eventBannerText{margin-top:10px;font-size:15px;color:#ead6db;line-height:1.6}
+
+#augmentOverlay{position:absolute;inset:0;z-index:45;display:none;align-items:center;justify-content:center;background:#0e090cd9;pointer-events:auto}
+#augmentOverlay.show{display:flex}
+#augmentPanel{width:min(930px,94%);background:#24161c;border:3px solid #995766;border-radius:13px;padding:16px;box-shadow:0 20px 70px #000b}
+#augmentHeader{font-size:22px;font-weight:1000;color:#ffe5bd;margin:2px 2px 14px}
+#augmentHeader small{display:block;margin-top:4px;font-size:11px;font-weight:700;color:#cdb5bd}
+#augmentCards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.augmentCard{position:relative;min-height:220px;padding:15px 13px 13px;text-align:left;border:3px solid #80505b;border-radius:10px;background:#302028;color:#fff;cursor:pointer;box-shadow:0 7px #140d11;transition:.12s transform,.12s background}
+.augmentCard:hover{transform:translateY(-4px);background:#3d2831}
+.augmentCard .augIcon{font-size:30px;margin-bottom:8px}
+.augmentCard .augName{font-size:17px;font-weight:1000;color:#fff0dc;margin-bottom:6px}
+.augmentCard .augDesc{font-size:12px;line-height:1.5;color:#e0ced3}
+.augmentCard .augTarget{position:absolute;left:12px;bottom:10px;font-size:10px;color:#c5aab3}
+.augmentCard .augRarity{position:absolute;right:10px;top:9px;padding:3px 7px;border-radius:5px;font-size:9px;font-weight:1000}
+.augmentCard.common{border-color:#7a7073}.augmentCard.common .augRarity{background:#655c60}
+.augmentCard.rare{border-color:#5f78a8}.augmentCard.rare .augRarity{background:#435b8a}
+.augmentCard.epic{border-color:#9661aa}.augmentCard.epic .augRarity{background:#704281}
+
+@media(max-width:880px){
+ #augmentTracker{display:none}
+ #augmentCards{grid-template-columns:1fr;max-height:70vh;overflow:auto}
+ .augmentCard{min-height:150px}
+ #eventBannerTitle{font-size:26px}
 }
